@@ -71,7 +71,7 @@ var Application = {
 
 	initShowDok: function () {
 		$.ajax({
-			url: 'https://secret-ocean-63858.herokuapp.com/read_dokter.php',
+			url: 'https://vast-cliffs-90191.herokuapp.com/php/read_dokter.php',
 			type: 'get',
 			headers: { "Accept-Encoding": "gzip" },
 			beforeSend: function () {
@@ -102,7 +102,7 @@ var Application = {
 
 	initShowDetailDok: function (nip) {
 		$.ajax({
-			url: 'https://secret-ocean-63858.herokuapp.com/read_dokter.php',
+			url: 'https://vast-cliffs-90191.herokuapp.com/php/read_dokter.php',
 			type: 'get',
 			headers: { "Accept-Encoding": "gzip" },
 			beforeSend: function () {

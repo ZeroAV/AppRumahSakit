@@ -14,7 +14,7 @@ var Application = {
 	initShowTrx: function () {
 		$.ajax({
 			//url: 'http://localhost/rumahsakit/www/php/read_transaksi.php',
-			url: 'https://secret-ocean-63858.herokuapp.com/read_transaksi.php',
+			url: 'https://vast-cliffs-90191.herokuapp.com/php/read_transaksi.php',
 			type: 'get',
 			beforeSend: function(){
 				$.mobile.loading('show',{
@@ -45,7 +45,7 @@ var Application = {
 	initShowDetailTrx: function (no) {
 		$.ajax({
 			//url: 'http://localhost/rumahsakit/www/php/read_transaksi.php',
-			url: 'https://secret-ocean-63858.herokuapp.com/read_transaksi.php',
+			url: 'https://secret-ocean-63858.herokuapp.com/php/read_transaksi.php',
 			type: 'get',
 			beforeSend: function(){
 				$.mobile.loading('show',{
@@ -94,7 +94,7 @@ var Application = {
 
 	initShowTrxChoicesDok: function () {
 		$.ajax({
-			url: 'https://secret-ocean-63858.herokuapp.com/read_dokter.php',
+			url: 'https://secret-ocean-63858.herokuapp.com/php/read_dokter.php',
 			type: 'get',
 			beforeSend: function(){
 				$.mobile.loading('show',{
@@ -119,7 +119,7 @@ var Application = {
 
 	initShowTrxChoicesPsn: function () {
 		$.ajax({
-			url: 'https://secret-ocean-63858.herokuapp.com/read_pasien.php',
+			url: 'https://secret-ocean-63858.herokuapp.com/php/read_pasien.php',
 			type: 'get',
 			beforeSend: function(){
 				$.mobile.loading('show',{
@@ -144,7 +144,7 @@ var Application = {
 
 	initShowTrxChoicesPyk: function () {
 		$.ajax({
-			url: 'https://secret-ocean-63858.herokuapp.com/read_penyakit.php',
+			url: 'https://secret-ocean-63858.herokuapp.com/php/read_penyakit.php',
 			type: 'get',
 			beforeSend: function(){
 				$.mobile.loading('show',{
@@ -170,7 +170,7 @@ var Application = {
 
 	initShowTrxChoicesEdit: function () {
 		$.ajax({
-			url: 'http://localhost/rumahsakit/www/php/read_transaksi.php',
+			url: 'https://vast-cliffs-90191.herokuapp.com/php/read_transaksi.php',
 			type: 'get',
 			beforeSend: function(){
 				$.mobile.loading('show',{

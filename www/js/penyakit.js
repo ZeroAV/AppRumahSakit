@@ -24,7 +24,7 @@ var Application = {
 	initShowPenyakit: function () {
 		$.ajax({
 			// url: 'https://api.jsonbin.io/b/5dd3e9103da40e6f298c2ff8',
-			url: 'https://secret-ocean-63858.herokuapp.com/read_penyakit.php',
+			url: 'https://vast-cliffs-90191.herokuapp.com/php/read_penyakit.php',
 			//url: 'http://localhost/rumahsakit/www/php/read_penyakit.php',
 			type: 'get',
 			beforeSend: function () {
@@ -61,7 +61,7 @@ var Application = {
 
 	initShowDetailPenyakit: function (kode) {
 		$.ajax({
-			url: 'https://secret-ocean-63858.herokuapp.com/read_penyakit.php',
+			url: 'https://vast-cliffs-90191.herokuapp.com/php/read_penyakit.php',
 			type: 'get',
 			beforeSend: function () {
 				$.mobile.loading('show', {
@@ -92,7 +92,7 @@ var Application = {
 		$('#form_penyakit').submit(function () {
 			$.ajax({
 				url: 'http://localhost/rumahsakit/www/php/add_penyakit.php',
-				//url: 'https://secret-ocean-63858.herokuapp.com/add_penyakit.php',
+				//url: 'https://vast-cliffs-90191.herokuapp.com/php/add_penyakit.php',
 				type: 'post',
 				async: 'true',
 				data: {

@@ -11,7 +11,7 @@ var Application = {
 
 	initShowPsn: function () {
 		$.ajax({
-			url: 'https://secret-ocean-63858.herokuapp.com/read_pasien.php',
+			url: 'https://vast-cliffs-90191.herokuapp.com/php/read_pasien.php',
 			type: 'get',
 			beforeSend: function(){
 				$.mobile.loading('show',{
@@ -41,7 +41,7 @@ var Application = {
 
 	initShowDetailPsn: function (id) {
 		$.ajax({
-			url: 'https://secret-ocean-63858.herokuapp.com/read_pasien.php',
+			url: 'https://vast-cliffs-90191.herokuapp.com/php/read_pasien.php',
 			type: 'get',
 			beforeSend: function(){
 				$.mobile.loading('show',{
