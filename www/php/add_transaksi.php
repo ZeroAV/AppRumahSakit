@@ -10,7 +10,7 @@ $query="INSERT INTO transaksi (no_transaksi, id_pasien, nip_dokter, kode_penyaki
 $result=$conn->query($query);
 if($result){
     header('access-control-allow-origin:*');
-    header("location: https://vast-cliffs-90191.herokuapp.com/transaksi.html");
+    header("location: /transaksi.html");
     mysqli_close($conn);
     echo 'success';
 }else{

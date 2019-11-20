@@ -8,7 +8,7 @@ $query="INSERT INTO penyakit (kode_penyakit, nama_penyakit, golongan) VALUES ('$
 $result=$conn->query($query);
 if($result){
     header('access-control-allow-origin:*');
-    header("location: https://vast-cliffs-90191.herokuapp.com/penyakit.html");
+    header("location: /penyakit.html");
     mysqli_close($conn);
     echo 'success';
 }else{

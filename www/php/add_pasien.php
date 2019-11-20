@@ -13,7 +13,7 @@ $query="INSERT INTO pasien (nama_pasien, jenis_kelamin, alamat, no_telp, umur, b
 $result=$conn->query($query);
 if($result){
     header('access-control-allow-origin:*');
-    header("location: https://vast-cliffs-90191.herokuapp.com/pasien.html");
+    header("location: /pasien.html");
     mysqli_close($conn);
     echo 'success';
 }else{
