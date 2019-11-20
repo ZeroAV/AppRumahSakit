@@ -76,9 +76,8 @@ var Application = {
 					if(dataObject.kode_penyakit==kode_penyakit){
 						nama_penyakit = dataObject.nama_penyakit;
 					}
-					
 				})
-				$('#p-no_transaksi,#p-id_pasien,#p-nama_pasien,#p-nip_dokter,#p-nama_dokter,#p-kode_penyakit,#p-nama_dokter,#p-biaya_perawatan').empty();
+				$('#p-no_transaksi,#p-id_pasien,#p-nama_pasien,#p-nip_dokter,#p-nama_dokter,#p-kode_penyakit,#p-nama_penyakit,#p-nama_dokter,#p-biaya_perawatan').empty();
 				$('#p-no_transaksi').append('<b>No. Transaksi: </b>'+no_transaksi);
 				$('#p-id_pasien').append('<b>ID Pasien: </b>'+id_pasien);
 				$('#p-nama_pasien').append('<b>Nama Pasien: </b>'+nama_pasien);
