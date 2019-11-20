@@ -57,7 +57,7 @@
         </div>
 
         <div role="main" class="ui-content">
-            <form id="form_dokter" data-ajax="false" action="/php/add_penyakit.php" method="POST">
+            <form id="form_penyakit" data-ajax="false" method="POST" action="php/add_penyakit.php" accept-charset=utf-8>
                 <label for="kode">Kode Penyakit</label>
                 <input type="text" name="kode" id="kode" value=""><br>
                 <label for="nama">Nama Penyakit</label>
@@ -68,8 +68,6 @@
                     <option value="2">2</option>
                     <option value="3">3</option>
                 </select><br>
-                <label for="biaya">Biaya Perawatan (Rp.)</label>
-                <input type="number" name="biaya" id="biaya" value=""><br>
                 <input type="submit" value="Add" data-icon="plus">
             </form>
         </div>

@@ -5,34 +5,55 @@ var Application = {
 		})
 		$(document).on('click', "#detail", function () {
 			var kode = $(this).data('kode');
-			Application.initShowDetailPenyakit(kode);
+			$(document).on('pageinit', '#page-two', function () {
+				Application.initShowDetailPenyakit(kode);
+			})
 		})
+		/*$(document).on('pageinit', '#page-three', function () {
+			$('#form_penyakit').submit(function () {
+				$.mobile.changePage("#page-one");
+				$('#form_penyakit').ajaxComplete(function () {
+					return;
+				});
+			});
+			
+
+		})*/
 	},
 
 	initShowPenyakit: function () {
 		$.ajax({
-			url: 'https://api.jsonbin.io/b/5dd3ead22e22356f234e3d7f',
+			// url: 'https://api.jsonbin.io/b/5dd3e9103da40e6f298c2ff8',
+			url: 'https://secret-ocean-63858.herokuapp.com/read_penyakit.php',
+			//url: 'http://localhost/rumahsakit/www/php/read_penyakit.php',
 			type: 'get',
-			beforeSend: function(){
-				$.mobile.loading('show',{
+			beforeSend: function () {
+				$.mobile.loading('show', {
 					text: 'Please wait while retrieving data...',
 					textVisible: true
 				});
 			},
 
-			success: function(dataObject){
+			success: function (dataObject) {
+				console.log(JSON.parse(dataObject));
+				// return
+				let data = JSON.parse(dataObject);
 				var appendList = '';
-				dataObject.penyakit.forEach(dataObject=>{
-					appendList= '<li><a href=#page-two?kode="'+
-					dataObject.kode_penyakit+'" target="_self" id="detail" data-kode="'+
-					dataObject.kode_penyakit+'"><h2>'+dataObject.nama_penyakit+'</h2><p>Kode: '+dataObject.kode_penyakit+
-					'</p><p>Golongan: '+dataObject.golongan+'</p></a></li>';
+				data.forEach(row => {
+					appendList = '<li><a href=#page-two?kode="' +
+						row.kode_penyakit + '" target="_self" id="detail" data-kode="' +
+						row.kode_penyakit + '"><h2>' + row.nama_penyakit + '</h2><p>Kode: ' + row.kode_penyakit +
+						'</p><p>Golongan: ' + row.golongan + '</p></a></li>';
 					$('#list-pyk').append(appendList);
 					$('#list-pyk').listview('refresh');
 				})
 			},
-			
-			complete: function(){
+
+			failed: function (res) {
+				console.log("halo")
+			},
+
+			complete: function () {
 				$.mobile.loading('hide');
 			}
 		});
@@ -40,29 +61,66 @@ var Application = {
 
 	initShowDetailPenyakit: function (kode) {
 		$.ajax({
-			url: 'https://api.jsonbin.io/b/5dd3ead22e22356f234e3d7f',
+			url: 'https://secret-ocean-63858.herokuapp.com/read_penyakit.php',
 			type: 'get',
-			beforeSend: function(){
-				$.mobile.loading('show',{
+			beforeSend: function () {
+				$.mobile.loading('show', {
 					text: 'Please wait while retrieving data...',
 					textVisible: true
 				});
 			},
 
-			success: function(dataObject){
-				dataObject.penyakit.forEach(dataObject=>{
-					if(dataObject.kode_penyakit==kode){
+			success: function (dataObject) {
+				let data = JSON.parse(dataObject);
+				data.forEach(row => {
+					if (row.kode_penyakit == kode) {
 						$('#p-kode_penyakit,#p-nama_penyakit,#p-golongan').empty();
-						$('#p-kode_penyakit').append('<b>Kode Penyakit: </b>'+dataObject.kode_penyakit);
-						$('#p-nama_penyakit').append('<b>Nama Penyakit: </b>'+dataObject.nama_penyakit);
-						$('#p-golongan').append('<b>Jenis Kelamin: </b>'+dataObject.golongan);
+						$('#p-kode_penyakit').append('<b>Kode Penyakit: </b>' + row.kode_penyakit);
+						$('#p-nama_penyakit').append('<b>Nama Penyakit: </b>' + row.nama_penyakit);
+						$('#p-golongan').append('<b>Jenis Kelamin: </b>' + row.golongan);
 					}
 				})
 			},
-			
-			complete: function(){
+
+			complete: function () {
 				$.mobile.loading('hide');
 			}
 		});
-	}
+	},
+
+	/*addPenyakit: function () {
+		$('#form_penyakit').submit(function () {
+			$.ajax({
+				url: 'http://localhost/rumahsakit/www/php/add_penyakit.php',
+				//url: 'https://secret-ocean-63858.herokuapp.com/add_penyakit.php',
+				type: 'post',
+				async: 'true',
+				data: {
+					formData: $('#form_penyakit').serialize()
+				},
+				dataType: 'json',
+				beforeSend: function () {
+					$.mobile.loading('show', {
+						text: 'Adding data...',
+						textVisible: true
+					});
+				},
+
+				success: function () {
+					console.log($('#form_penyakit').serialize());
+					$.mobile.changePage("#page-one");
+					Application.initPenyakit();
+				},
+
+				error: function (request, error) {
+					alert('Network error has occurred please try again!');
+				},
+
+				complete: function () {
+					$.mobile.loading('hide');
+				}
+			});
+		})
+
+	}*/
 }

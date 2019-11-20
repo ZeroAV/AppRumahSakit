@@ -13,7 +13,8 @@ var Application = {
 
 	initShowTrx: function () {
 		$.ajax({
-			url: 'https://api.jsonbin.io/b/5dd3ead22e22356f234e3d7f',
+			//url: 'http://localhost/rumahsakit/www/php/read_transaksi.php',
+			url: 'https://secret-ocean-63858.herokuapp.com/read_transaksi.php',
 			type: 'get',
 			beforeSend: function(){
 				$.mobile.loading('show',{
@@ -23,12 +24,13 @@ var Application = {
 			},
 
 			success: function(dataObject){
+				let data = JSON.parse(dataObject);
 				var appendList = '';
-				dataObject.transaksi.forEach(dataObject=>{
+				data.forEach(row=>{
 					appendList= '<li><a href=#page-two?no="'+
-					dataObject.no_transaksi+'" target="_self" id="detail" data-no="'+
-					dataObject.no_transaksi+'"><h2>'+dataObject.no_transaksi+'</h2><p>ID Pasien: '+dataObject.id_pasien+
-					'</p><p>NIP Dokter: '+dataObject.nip_dokter+'</p></a></li>';
+					row.no_transaksi+'" target="_self" id="detail" data-no="'+
+					row.no_transaksi+'"><h2>'+row.no_transaksi+'</h2><p>ID Pasien: '+row.id_pasien+
+					'</p><p>NIP Dokter: '+row.nip_dokter+'</p></a></li>';
 					$('#list-trx').append(appendList);
 					$('#list-trx').listview('refresh');
 				})
@@ -42,7 +44,8 @@ var Application = {
 
 	initShowDetailTrx: function (no) {
 		$.ajax({
-			url: 'https://api.jsonbin.io/b/5dd3ead22e22356f234e3d7f',
+			//url: 'http://localhost/rumahsakit/www/php/read_transaksi.php',
+			url: 'https://secret-ocean-63858.herokuapp.com/read_transaksi.php',
 			type: 'get',
 			beforeSend: function(){
 				$.mobile.loading('show',{
@@ -53,28 +56,17 @@ var Application = {
 
 			success: function(dataObject){
 				var no_transaksi, id_pasien, nama_pasien, nip_dokter, nama_dokter, kode_penyakit, nama_penyakit, biaya_perawatan;
-				dataObject.transaksi.forEach(dataObject=>{
-					if(dataObject.no_transaksi==no){
-						no_transaksi = dataObject.no_transaksi;
-						id_pasien = dataObject.id_pasien;
-						nip_dokter = dataObject.nip_dokter;
-						kode_penyakit = dataObject.kode_penyakit;
-						biaya_perawatan = dataObject.biaya_perawatan;
-					}
-				})
-				dataObject.pasien.forEach(dataObject=>{
-					if(dataObject.ID==id_pasien){
-						nama_pasien = dataObject.nama_pasien;
-					}
-				})
-				dataObject.dokter.forEach(dataObject=>{
-					if(dataObject.NIP==nip_dokter){
-						nama_dokter = dataObject.nama;
-					}
-				})
-				dataObject.penyakit.forEach(dataObject=>{
-					if(dataObject.kode_penyakit==kode_penyakit){
-						nama_penyakit = dataObject.nama_penyakit;
+				let data = JSON.parse(dataObject);
+				data.forEach(row=>{
+					if(row.no_transaksi==no){
+						no_transaksi = row.no_transaksi;
+						id_pasien = row.id_pasien;
+						nip_dokter = row.nip_dokter;
+						kode_penyakit = row.kode_penyakit;
+						biaya_perawatan = row.biaya_perawatan;
+						nama_pasien = row.nama_pasien;
+						nama_dokter = row.nama;
+						nama_penyakit = row.nama_penyakit;
 					}
 				})
 				$('#p-no_transaksi,#p-id_pasien,#p-nama_pasien,#p-nip_dokter,#p-nama_dokter,#p-kode_penyakit,#p-nama_penyakit,#p-nama_dokter,#p-biaya_perawatan').empty();
@@ -95,8 +87,90 @@ var Application = {
 	},
 	
 	initShowTrxChoices: function () {
+		Application.initShowTrxChoicesPsn();
+		Application.initShowTrxChoicesDok();
+		Application.initShowTrxChoicesPyk();
+	},
+
+	initShowTrxChoicesDok: function () {
 		$.ajax({
-			url: 'https://api.jsonbin.io/b/5dd3ead22e22356f234e3d7f',
+			url: 'https://secret-ocean-63858.herokuapp.com/read_dokter.php',
+			type: 'get',
+			beforeSend: function(){
+				$.mobile.loading('show',{
+					text: 'Please wait while retrieving data...',
+					textVisible: true
+				});
+			},
+
+			success: function(dataObject){
+				let data = JSON.parse(dataObject);
+				$('#select-dok').empty();
+				data.forEach(row=>{
+					$('#select-dok').append($('<option>').text(row.NIP).attr('value', row.NIP));
+				})
+			},
+			
+			complete: function(){
+				$.mobile.loading('hide');
+			}
+		});
+	},
+
+	initShowTrxChoicesPsn: function () {
+		$.ajax({
+			url: 'https://secret-ocean-63858.herokuapp.com/read_pasien.php',
+			type: 'get',
+			beforeSend: function(){
+				$.mobile.loading('show',{
+					text: 'Please wait while retrieving data...',
+					textVisible: true
+				});
+			},
+
+			success: function(dataObject){
+				let data = JSON.parse(dataObject);
+				$('#select-psn').empty();
+				data.forEach(row=>{
+					$('#select-psn').append($('<option>').text(row.ID).attr('value', row.ID));
+				})
+			},
+			
+			complete: function(){
+				$.mobile.loading('hide');
+			}
+		});
+	},
+
+	initShowTrxChoicesPyk: function () {
+		$.ajax({
+			url: 'https://secret-ocean-63858.herokuapp.com/read_penyakit.php',
+			type: 'get',
+			beforeSend: function(){
+				$.mobile.loading('show',{
+					text: 'Please wait while retrieving data...',
+					textVisible: true
+				});
+			},
+
+			success: function(dataObject){
+				let data = JSON.parse(dataObject);
+				$('#select-pyk').empty();
+				data.forEach(row=>{
+					$('#select-pyk').append($('<option>').text(row.kode_penyakit).attr('value', row.kode_penyakit));
+				})
+			},
+			
+			complete: function(){
+				$.mobile.loading('hide');
+			}
+		});
+	},
+
+
+	initShowTrxChoicesEdit: function () {
+		$.ajax({
+			url: 'http://localhost/rumahsakit/www/php/read_transaksi.php',
 			type: 'get',
 			beforeSend: function(){
 				$.mobile.loading('show',{
@@ -107,15 +181,12 @@ var Application = {
 
 			success: function(dataObject){
 				var pasien, dokter, penyakit;
+				let data = JSON.parse(dataObject);
 				$('#select-psn,#select-dok,#select-pyk').empty();
-				dataObject.pasien.forEach(dataObject=>{
-					$('#select-psn').append($('<option>').text(dataObject.ID).attr('value', dataObject.ID));
-				})
-				dataObject.dokter.forEach(dataObject=>{
-					$('#select-dok').append($('<option>').text(dataObject.NIP).attr('value', dataObject.NIP));
-				})
-				dataObject.penyakit.forEach(dataObject=>{
-					$('#select-pyk').append($('<option>').text(dataObject.kode_penyakit).attr('value', dataObject.kode_penyakit));
+				data.forEach(row=>{
+					$('#select-psn').append($('<option>').text(row.ID).attr('value', row.ID));
+					$('#select-dok').append($('<option>').text(row.NIP).attr('value', row.NIP));
+					$('#select-pyk').append($('<option>').text(row.kode_penyakit).attr('value', row.kode_penyakit));
 				})
 				
 			},

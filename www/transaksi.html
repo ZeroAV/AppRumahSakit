@@ -52,7 +52,7 @@
             <p id="p-nama_penyakit"></p>
             <p id="p-biaya_perawatan"></p>
             <a href="#" class="ui-btn ui-icon-edit ui-btn-icon-left" id="edit_btn">Edit</a>
-            <a href="#" class="ui-btn ui-icon-delete ui-btn-icon-left" id="del_btn">Delete</a>
+            <a href="php/delete_transaksi.php" class="ui-btn ui-icon-delete ui-btn-icon-left" id="del_btn">Delete</a>
         </div>
     </div>
 
@@ -62,7 +62,7 @@
             </div>
     
             <div role="main" class="ui-content">
-                <form id="form_dokter" data-ajax="false" action="/php/add_transaksi.php" method="POST">
+                <form id="form-transaksi" data-ajax="false" action="php/add_transaksi.php" method="POST">
                     <label for="no">No. Transaksi</label>
                     <input type="text" name="no" id="no" value=""><br>
                     <label for="select-psn" class="select">ID Pasien</label>
@@ -77,7 +77,8 @@
                     <select name="select-pyk" id="select-pyk">
                         <option value=""></option>
                     </select><br>
-                    
+                    <label for="biaya">Biaya</label>
+                    <input type="text" name="biaya" id="biaya" value=""><br>
                     <input type="submit" value="Add" data-icon="plus">
                 </form>
             </div>
