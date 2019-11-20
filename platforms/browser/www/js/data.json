@@ -1,0 +1,25 @@
+[{
+    "nim": "125060400111044",
+    "nama": "Isyana Sarasvati",
+    "jurusan": "Teknik Informatika",
+    "fakultas": "Filkom",
+    "alamat": "Jl. Suka Nyanyi",
+    "noHP": "081234567890"
+},
+{
+    "nim": "135060401111005",
+    "nama": "Marion Jola",
+    "jurusan": "komunikasi",
+    "fakultas": "FISIP",
+    "alamat": "Kec. Wakanda",
+    "noHP": "08765432109"
+},
+{
+    "nim": "175150200111007", 
+    "nama": "Aditya Luthfi", 
+    "jurusan": "Teknik Informatika", 
+    "fakultas": "FILKOM", 
+    "alamat": "Kec. Lowokwaru", 
+    "noHP": "081212143838"
+}
+]

@@ -1,0 +1,180 @@
+{
+    "dokter": [
+      {
+        "NIP": "001",
+        "nama": "Aldy",
+        "jenis_kelamin": "L",
+        "alamat": "Jalan Buntu 1",
+        "no_telp": "081333533325",
+        "gaji_pokok": "1500000"
+      },
+      {
+        "NIP": "002",
+        "nama": "Adit",
+        "jenis_kelamin": "L",
+        "alamat": "Jalan Buntu 2",
+        "no_telp": "082122299910",
+        "gaji_pokok": "1500000"
+      },
+      {
+        "NIP": "003",
+        "nama": "Haechal",
+        "jenis_kelamin": "L",
+        "alamat": "Jalan Buntu 3",
+        "no_telp": "085929099952",
+        "gaji_pokok": "1250000"
+      },
+      {
+        "NIP": "004",
+        "nama": "Dika",
+        "jenis_kelamin": "L",
+        "alamat": "Jalan Buntu 4",
+        "no_telp": "085239393930",
+        "gaji_pokok": "1200000"
+      },
+      {
+        "NIP": "005",
+        "nama": "Bayu",
+        "jenis_kelamin": "L",
+        "alamat": "Jl Anu",
+        "no_telp": "0211111111",
+        "gaji_pokok": "1000000"
+      }
+    ],
+    "pasien": [
+      {
+        "ID": "1",
+        "nama_pasien": "Bagas",
+        "jenis_kelamin": "L",
+        "alamat": "Jalan Mundur 1",
+        "no_telp": "0341411002",
+        "umur": "12",
+        "berat_badan": "35",
+        "tinggi_badan": "130",
+        "golongan_darah": "A"
+      },
+      {
+        "ID": "2",
+        "nama_pasien": "Vika",
+        "jenis_kelamin": "P",
+        "alamat": "Jalan Maju 2",
+        "no_telp": "0341415378",
+        "umur": "16",
+        "berat_badan": "55",
+        "tinggi_badan": "150",
+        "golongan_darah": "O"
+      },
+      {
+        "ID": "3",
+        "nama_pasien": "Putra",
+        "jenis_kelamin": "L",
+        "alamat": "Jalan Terus 3",
+        "no_telp": "081592098233",
+        "umur": "25",
+        "berat_badan": "78",
+        "tinggi_badan": "175",
+        "golongan_darah": "AB"
+      },
+      {
+        "ID": "4",
+        "nama_pasien": "Putri",
+        "jenis_kelamin": "P",
+        "alamat": "Jalan Dulu Aja 4",
+        "no_telp": "082133099872",
+        "umur": "30",
+        "berat_badan": "67",
+        "tinggi_badan": "170",
+        "golongan_darah": "B"
+      },
+      {
+        "ID": "5",
+        "nama_pasien": "Adi",
+        "jenis_kelamin": "L",
+        "alamat": "Jl 1",
+        "no_telp": "081188899",
+        "umur": "33",
+        "berat_badan": "60",
+        "tinggi_badan": "160",
+        "golongan_darah": "O"
+      }
+    ],
+    "penyakit": [
+      {
+        "kode_penyakit": "1",
+        "nama_penyakit": "Demam",
+        "golongan": "1"
+      },
+      {
+        "kode_penyakit": "2",
+        "nama_penyakit": "Batuk",
+        "golongan": "1"
+      },
+      {
+        "kode_penyakit": "3",
+        "nama_penyakit": "Diare",
+        "golongan": "2"
+      },
+      {
+        "kode_penyakit": "4",
+        "nama_penyakit": "DBD",
+        "golongan": "2"
+      },
+      {
+        "kode_penyakit": "5",
+        "nama_penyakit": "Typhus",
+        "golongan": "2"
+      },
+      {
+        "kode_penyakit": "6",
+        "nama_penyakit": "Stroke",
+        "golongan": "3"
+      },
+      {
+        "kode_penyakit": "7",
+        "nama_penyakit": "Infeksi dalam",
+        "golongan": "3"
+      },
+      {
+        "kode_penyakit": "8",
+        "nama_penyakit": "Ambeien",
+        "golongan": "1"
+      }
+    ],
+    "transaksi": [
+      {
+        "no_transaksi": "1",
+        "id_pasien": "1",
+        "nip_dokter": "001",
+        "kode_penyakit": "2",
+        "biaya_perawatan": "50000"
+      },
+      {
+        "no_transaksi": "2",
+        "id_pasien": "3",
+        "nip_dokter": "004",
+        "kode_penyakit": "6",
+        "biaya_perawatan": "200000"
+      },
+      {
+        "no_transaksi": "3",
+        "id_pasien": "4",
+        "nip_dokter": "002",
+        "kode_penyakit": "4",
+        "biaya_perawatan": "160000"
+      },
+      {
+        "no_transaksi": "4",
+        "id_pasien": "4",
+        "nip_dokter": "002",
+        "kode_penyakit": "3",
+        "biaya_perawatan": "250000"
+      },
+      {
+        "no_transaksi": "5",
+        "id_pasien": "2",
+        "nip_dokter": "004",
+        "kode_penyakit": "5",
+        "biaya_perawatan": "100000"
+      }
+    ]
+  }
