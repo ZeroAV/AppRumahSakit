@@ -1,3 +1,4 @@
+var kodepyk;
 var Application = {
 	initPenyakit: function () {
 		$(window).load('pageinit', '#page-one', function () {
@@ -9,16 +10,22 @@ var Application = {
 				Application.initShowDetailPenyakit(kode);
 			})
 		})
-		/*$(document).on('pageinit', '#page-three', function () {
-			$('#form_penyakit').submit(function () {
-				$.mobile.changePage("#page-one");
-				$('#form_penyakit').ajaxComplete(function () {
+		$(document).on('pageinit', '#page-three', function () {
+			console.log('initthree')
+			$('#form_penyakit').submit(function (e) {
+				e.preventDefault();
+				console.log('submit');
+				Application.addPenyakit();
+				$('#form_penyakit').ajaxComplete(function (e) {
+					e.preventDefault();
+					console.log('ajaxcom')
 					return;
 				});
 			});
-			
-
-		})*/
+		})
+		$(document).on('click', "#del_btn", function () {
+			Application.deletePenyakit(kodepyk);
+		})
 	},
 
 	initShowPenyakit: function () {
@@ -39,6 +46,7 @@ var Application = {
 				// return
 				let data = JSON.parse(dataObject);
 				var appendList = '';
+				$('#list-pyk').empty();
 				data.forEach(row => {
 					appendList = '<li><a href=#page-two?kode="' +
 						row.kode_penyakit + '" target="_self" id="detail" data-kode="' +
@@ -74,6 +82,7 @@ var Application = {
 				let data = JSON.parse(dataObject);
 				data.forEach(row => {
 					if (row.kode_penyakit == kode) {
+						kodepyk=row.kode_penyakit;
 						$('#p-kode_penyakit,#p-nama_penyakit,#p-golongan').empty();
 						$('#p-kode_penyakit').append('<b>Kode Penyakit: </b>' + row.kode_penyakit);
 						$('#p-nama_penyakit').append('<b>Nama Penyakit: </b>' + row.nama_penyakit);
@@ -88,39 +97,83 @@ var Application = {
 		});
 	},
 
-	/*addPenyakit: function () {
-		$('#form_penyakit').submit(function () {
-			$.ajax({
-				url: 'http://localhost/rumahsakit/www/php/add_penyakit.php',
-				//url: 'https://vast-cliffs-90191.herokuapp.com/php/add_penyakit.php',
-				type: 'post',
-				async: 'true',
-				data: {
-					formData: $('#form_penyakit').serialize()
-				},
-				dataType: 'json',
-				beforeSend: function () {
-					$.mobile.loading('show', {
-						text: 'Adding data...',
-						textVisible: true
-					});
-				},
+	addPenyakit: function () {
+		$.ajax({
+			//url: 'http://localhost/rumahsakit/www/php/add_penyakit.php',
+			url: 'https://vast-cliffs-90191.herokuapp.com/php/add_penyakit.php',
+			type: 'POST',
+			async: 'true',
+			data: {
+				kode: $('#kode').val(),
+				nama: $('#nama').val(),
+				select_gol: $("select#select-gol option").filter(":selected").val()
+			},
+			beforeSend: function () {
+				console.log("beforesend");
+				$.mobile.loading('show', {
+					text: 'Adding data...',
+					textVisible: true
+				});
+			},
 
-				success: function () {
-					console.log($('#form_penyakit').serialize());
-					$.mobile.changePage("#page-one");
-					Application.initPenyakit();
-				},
+			success: function () {
+				console.log("succ");
+				$.mobile.changePage("#page-one");
+			},
 
-				error: function (request, error) {
-					alert('Network error has occurred please try again!');
-				},
+			error: function (request, error) {
+				console.log("error");
+				alert('Network error has occurred please try again!');
+			},
 
-				complete: function () {
-					$.mobile.loading('hide');
-				}
-			});
+			failed: function () {
+				console.log("salah");
+			},
+
+			complete: function () {
+				console.log("com");
+				$.mobile.loading('hide');
+				Application.initShowPenyakit();
+			}
 		})
+	},
 
-	}*/
+	deletePenyakit: function(pyk){
+		$.ajax({
+			//url: 'http://localhost/rumahsakit/www/php/delete_penyakit.php',
+			url: 'https://vast-cliffs-90191.herokuapp.com/php/delete_penyakit.php',
+			type: 'POST',
+			async: 'true',
+			data: {
+				kode: pyk
+			},
+			beforeSend: function () {
+				console.log("beforesend");
+				$.mobile.loading('show', {
+					text: 'Deleting data...',
+					textVisible: true
+				});
+			},
+
+			success: function () {
+				console.log("succ");
+				$.mobile.changePage("#page-one");
+			},
+
+			error: function (request, error) {
+				console.log("error");
+				alert('Network error has occurred please try again!');
+			},
+
+			failed: function () {
+				console.log("salah");
+			},
+
+			complete: function () {
+				console.log("com");
+				$.mobile.loading('hide');
+				Application.initShowPenyakit();
+			}
+		})
+	}
 }

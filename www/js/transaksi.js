@@ -1,3 +1,4 @@
+var notrx;
 var Application = {
 	initTrx: function () {
 		$(window).load('pageinit', '#page-one', function () {
@@ -8,7 +9,22 @@ var Application = {
 			var no = $(this).data('no');
 			Application.initShowDetailTrx(no);
 		})
-
+		$(document).on('pageinit', '#page-three', function () {
+			console.log('initthree')
+			$('#form_transaksi').submit(function (e) {
+				e.preventDefault();
+				console.log('submit');
+				Application.addTrx();
+				$('#form_transaksi').ajaxComplete(function (e) {
+					e.preventDefault();
+					console.log('ajaxcom')
+					return;
+				});
+			});
+		})
+		$(document).on('click', "#del_btn", function () {
+			Application.deleteTrx(notrx);
+		})
 	},
 
 	initShowTrx: function () {
@@ -26,6 +42,7 @@ var Application = {
 			success: function(dataObject){
 				let data = JSON.parse(dataObject);
 				var appendList = '';
+				$('#list-trx').empty();
 				data.forEach(row=>{
 					appendList= '<li><a href=#page-two?no="'+
 					row.no_transaksi+'" target="_self" id="detail" data-no="'+
@@ -45,7 +62,7 @@ var Application = {
 	initShowDetailTrx: function (no) {
 		$.ajax({
 			//url: 'http://localhost/rumahsakit/www/php/read_transaksi.php',
-			url: 'https://secret-ocean-63858.herokuapp.com/php/read_transaksi.php',
+			url: 'https://vast-cliffs-90191.herokuapp.com/php/read_transaksi.php',
 			type: 'get',
 			beforeSend: function(){
 				$.mobile.loading('show',{
@@ -60,6 +77,7 @@ var Application = {
 				data.forEach(row=>{
 					if(row.no_transaksi==no){
 						no_transaksi = row.no_transaksi;
+						notrx=no_transaksi;
 						id_pasien = row.id_pasien;
 						nip_dokter = row.nip_dokter;
 						kode_penyakit = row.kode_penyakit;
@@ -94,7 +112,7 @@ var Application = {
 
 	initShowTrxChoicesDok: function () {
 		$.ajax({
-			url: 'https://secret-ocean-63858.herokuapp.com/php/read_dokter.php',
+			url: 'https://vast-cliffs-90191.herokuapp.com/php/read_dokter.php',
 			type: 'get',
 			beforeSend: function(){
 				$.mobile.loading('show',{
@@ -119,7 +137,7 @@ var Application = {
 
 	initShowTrxChoicesPsn: function () {
 		$.ajax({
-			url: 'https://secret-ocean-63858.herokuapp.com/php/read_pasien.php',
+			url: 'https://vast-cliffs-90191.herokuapp.com/php/read_pasien.php',
 			type: 'get',
 			beforeSend: function(){
 				$.mobile.loading('show',{
@@ -144,7 +162,7 @@ var Application = {
 
 	initShowTrxChoicesPyk: function () {
 		$.ajax({
-			url: 'https://secret-ocean-63858.herokuapp.com/php/read_penyakit.php',
+			url: 'https://vast-cliffs-90191.herokuapp.com/php/read_penyakit.php',
 			type: 'get',
 			beforeSend: function(){
 				$.mobile.loading('show',{
@@ -196,4 +214,86 @@ var Application = {
 			}
 		});
 	},
+
+	addTrx: function () {
+		$.ajax({
+			//url: 'http://localhost/rumahsakit/www/php/add_transaksi.php',
+			url: 'https://vast-cliffs-90191.herokuapp.com/php/add_transaksi.php',
+			type: 'POST',
+			async: 'true',
+			data: {
+				no: $('#no').val(),
+				psn: $("select#select-psn option").filter(":selected").val(),
+				dok: $("select#select-dok option").filter(":selected").val(),
+				pyk: $("select#select-pyk option").filter(":selected").val(),
+				biaya: $('#biaya').val()
+			},
+			beforeSend: function () {
+				console.log("beforesend");
+				$.mobile.loading('show', {
+					text: 'Adding data...',
+					textVisible: true
+				});
+			},
+
+			success: function () {
+				console.log("succ");
+				$.mobile.changePage("#page-one");
+			},
+
+			error: function (request, error) {
+				console.log("error");
+				alert('Network error has occurred please try again!');
+			},
+
+			failed: function () {
+				console.log("salah");
+			},
+
+			complete: function () {
+				console.log("com");
+				$.mobile.loading('hide');
+				Application.initShowTrx();
+			}
+		})
+	},
+
+	deleteTrx: function(notrx){
+		$.ajax({
+			//url: 'http://localhost/rumahsakit/www/php/delete_transaksi.php',
+			url: 'https://vast-cliffs-90191.herokuapp.com/php/delete_transaksi.php',
+			type: 'POST',
+			async: 'true',
+			data: {
+				no: notrx
+			},
+			beforeSend: function () {
+				console.log("beforesend");
+				$.mobile.loading('show', {
+					text: 'Deleting data...',
+					textVisible: true
+				});
+			},
+
+			success: function () {
+				console.log("succ");
+				$.mobile.changePage("#page-one");
+			},
+
+			error: function (request, error) {
+				console.log("error");
+				alert('Network error has occurred please try again!');
+			},
+
+			failed: function () {
+				console.log("salah");
+			},
+
+			complete: function () {
+				console.log("com");
+				$.mobile.loading('hide');
+				Application.initShowTrx();
+			}
+		})
+	}
 }

@@ -1,3 +1,4 @@
+var nipdok;
 var Application = {
 	initDokter: function () {
 		$(window).load('pageinit', '#page-one', function () {
@@ -7,73 +8,28 @@ var Application = {
 			var nip = $(this).data('nip');
 			Application.initShowDetailDok(nip);
 		})
-		/*var activePage = $(':mobile-pagecontainer').pagecontainer('getActivePage');
-		if (activePage.attr('id') === 'page-three') {
-			$(document).on('click', '#submit', function () { // catch the form's submit event
-				if ($('#nip').val().length > 0 && $('#nama').val().length > 0 && $('#alamat').val().length > 0 && $('#no_telp').val().length > 0 && $('#gaji_pokok').val().length > 0) {
-					Application.addDokter();
-				} else {
-					alert('Please fill all necessary fields');
-				}
-				return false; // cancel original event to prevent form submitting
-			});
-		} else if(activePage.attr('id') === 'page-two'){
-			$(document).on('click', '#del_btn', function () {
-				Application.deleteDokter();
-			});
-		}
-		$('#form_dokter').validate({
-			rules: {
-				nip: {
-					required: true
-				},
-				nama: {
-					required: true
-				},
-				alamat: {
-					required: true
-				},
-				no_telp: {
-					required: true
-				},
-				gaji_pokok: {
-					required: true
-				}
-			},
-			messages: {
-				nip: {
-					required: "Masukkan NIP anda"
-				},
-				nama: {
-					required: "Masukkan nama anda"
-				},
-				alamat: {
-					required: "Masukkan alamat anda"
-				},
-				no_telp: {
-					required: "Masukkan no. telepon anda"
-				},
-				gaji_pokok: {
-					required: "Masukkan gaji pokok anda"
-				}
-			},
-			errorPlacement: function (error, element) {
-				error.appendTo(element.parent().prev());
-			},
-			submitHandler: function (form) {
-				$(':mobile-pagecontainer').pagecontainer('change', '#success', {
-					reload: false
+		$(document).on('pageinit', '#page-three', function () {
+			console.log('initthree')
+			$('#form_dokter').submit(function (e) {
+				e.preventDefault();
+				console.log('submit');
+				Application.addDok();
+				$('#form_dokter').ajaxComplete(function (e) {
+					e.preventDefault();
+					console.log('ajaxcom')
+					return;
 				});
-				return false;
-			}
-		})*/
+			});
+		})
+		$(document).on('click', "#del_btn", function () {
+			Application.deleteDok(nipdok);
+		})
 	},
 
 	initShowDok: function () {
 		$.ajax({
 			url: 'https://vast-cliffs-90191.herokuapp.com/php/read_dokter.php',
 			type: 'get',
-			headers: { "Accept-Encoding": "gzip" },
 			beforeSend: function () {
 				$.mobile.loading('show', {
 					text: 'Please wait while retrieving data...',
@@ -84,6 +40,7 @@ var Application = {
 			success: function (dataObject) {
 				let data = JSON.parse(dataObject);
 				var appendList = '';
+				$('#list-dok').empty();
 				data.forEach(row => {
 					appendList = '<li><a href=#page-two?nip="' +
 						row.NIP + '" target="_self" id="detail" data-nip="' +
@@ -104,7 +61,6 @@ var Application = {
 		$.ajax({
 			url: 'https://vast-cliffs-90191.herokuapp.com/php/read_dokter.php',
 			type: 'get',
-			headers: { "Accept-Encoding": "gzip" },
 			beforeSend: function () {
 				$.mobile.loading('show', {
 					text: 'Please wait while retrieving data...',
@@ -116,6 +72,7 @@ var Application = {
 				let data = JSON.parse(dataObject);
 				data.forEach(row => {
 					if (row.NIP == nip) {
+						nipdok=row.NIP;
 						$('#p-NIP,#p-nama,#p-jenis_kelamin,#p-alamat,#p-no_telp,#p-gaji_pokok').empty();
 						$('#p-NIP').append('<b>NIP: </b>' + row.NIP);
 						$('#p-nama').append('<b>Nama: </b>' + row.nama);
@@ -123,8 +80,6 @@ var Application = {
 						$('#p-alamat').append('<b>Alamat: </b>' + row.alamat);
 						$('#p-no_telp').append('<b>No. Telepon: </b>' + row.no_telp);
 						$('#p-gaji_pokok').append('<b>Gaji Pokok:</b> Rp.' + row.gaji_pokok);
-						$('#edit').append('<a href=php/edit_dokter.php?nip='+row.NIP+' class="ui-btn ui-icon-edit ui-btn-icon-left" id="edit_btn">Edit</a>');
-						$('#delete').append('<a href=php/delete_dokter.php?nip='+row.NIP+' class="ui-btn ui-icon-delete ui-btn-icon-left" id="del_btn">Delete</a>');
 					}
 				})
 			},
@@ -135,11 +90,86 @@ var Application = {
 		});
 	},
 
-	addDokter: function(){
-		
+	addDok: function () {
+		$.ajax({
+			//url: 'http://localhost/rumahsakit/www/php/add_dokter.php',
+			url: 'https://vast-cliffs-90191.herokuapp.com/php/add_dokter.php',
+			type: 'POST',
+			async: 'true',
+			data: {
+				nip: $('#nip').val(),
+				nama: $('#nama').val(),
+				select_jk: $("select#select-jk option").filter(":selected").val(),
+				alamat: $('#alamat').val(),
+				no_telp: $('#no_telp').val(),
+				gaji_pokok: $('#gaji_pokok').val()
+			},
+			beforeSend: function () {
+				console.log("beforesend");
+				$.mobile.loading('show', {
+					text: 'Adding data...',
+					textVisible: true
+				});
+			},
+
+			success: function () {
+				console.log("succ");
+				$.mobile.changePage("#page-one");
+			},
+
+			error: function (request, error) {
+				console.log("error");
+				alert('Network error has occurred please try again!');
+			},
+
+			failed: function () {
+				console.log("salah");
+			},
+
+			complete: function () {
+				console.log("com");
+				$.mobile.loading('hide');
+				Application.initShowDok();
+			}
+		})
 	},
 
-	deleteDokter: function(){
-		
+	deleteDok: function(n){
+		$.ajax({
+			//url: 'http://localhost/rumahsakit/www/php/delete_dokter.php',
+			url: 'https://vast-cliffs-90191.herokuapp.com/php/delete_dokter.php',
+			type: 'POST',
+			async: 'true',
+			data: {
+				nip: n
+			},
+			beforeSend: function () {
+				console.log("beforesend");
+				$.mobile.loading('show', {
+					text: 'Deleting data...',
+					textVisible: true
+				});
+			},
+
+			success: function () {
+				console.log("succ");
+				$.mobile.changePage("#page-one");
+			},
+
+			error: function (request, error) {
+				console.log("error");
+				alert('Network error has occurred please try again!');
+			},
+
+			failed: function () {
+				console.log("salah");
+			},
+
+			complete: function () {
+				console.log("com");
+				$.mobile.loading('hide');
+				Application.initShowDok();
+			}
+		})
 	}
 }

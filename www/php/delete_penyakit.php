@@ -1,7 +1,7 @@
 <?php
 include_once('koneksi.php');
-$nip=$_POST['nip'];
-$query="DELETE FROM dokter WHERE NIP='$nip'";
+$kode=$_POST['kode'];
+$query="DELETE FROM penyakit WHERE kode_penyakit='$kode'";
 $result=$conn->query($query);
 if($result){
     mysqli_close($conn);
