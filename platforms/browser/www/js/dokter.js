@@ -1,20 +1,20 @@
-var idpsn;
+var nipdok;
 var Application = {
-	initPasien: function () {
+	initDokter: function () {
 		$(window).load('pageinit', '#page-one', function () {
-			Application.initShowPsn();
+			Application.initShowDok();
 		})
 		$(document).on('click', "#detail", function () {
-			var id = $(this).data('id');
-			Application.initShowDetailPsn(id);
+			var nip = $(this).data('nip');
+			Application.initShowDetailDok(nip);
 		})
 		$(document).on('pageinit', '#page-three', function () {
 			console.log('initthree')
-			$('#form_pasien').submit(function (e) {
+			$('#form_dokter').submit(function (e) {
 				e.preventDefault();
 				console.log('submit');
-				Application.addPsn();
-				$('#form_pasien').ajaxComplete(function (e) {
+				Application.addDok();
+				$('#form_dokter').ajaxComplete(function (e) {
 					e.preventDefault();
 					console.log('ajaxcom')
 					return;
@@ -22,15 +22,15 @@ var Application = {
 			});
 		})
 		$(document).on('click', "#del_btn", function () {
-			Application.deletePsn(idpsn);
+			Application.deleteDok(nipdok);
 		})
 		$(document).on('click', "#edit_btn", function () {
 			$.mobile.changePage("#page-four");
-			$('#eform_pasien').submit(function (e) {
+			$('#eform_dokter').submit(function (e) {
 				e.preventDefault();
 				console.log('submit');
-				Application.editPsn(idpsn);
-				$('#eform_pasien').ajaxComplete(function (e) {
+				Application.editDok(nipdok);
+				$('#eform_dokter').ajaxComplete(function (e) {
 					e.preventDefault();
 					console.log('ajaxcom')
 					return;
@@ -39,9 +39,9 @@ var Application = {
 		})
 	},
 
-	initShowPsn: function () {
+	initShowDok: function () {
 		$.ajax({
-			url: 'https://vast-cliffs-90191.herokuapp.com/php/read_pasien.php',
+			url: 'https://vast-cliffs-90191.herokuapp.com/php/read_dokter.php',
 			type: 'get',
 			beforeSend: function () {
 				$.mobile.loading('show', {
@@ -53,14 +53,14 @@ var Application = {
 			success: function (dataObject) {
 				let data = JSON.parse(dataObject);
 				var appendList = '';
-				$('#list-psn').empty();
+				$('#list-dok').empty();
 				data.forEach(row => {
-					appendList = '<li><a href=#page-two?id="' +
-						row.ID + '" target="_self" id="detail" data-id="' +
-						row.ID + '"><h2>' + row.nama_pasien + '</h2><p>ID: ' + row.ID +
+					appendList = '<li><a href=#page-two?nip="' +
+						row.NIP + '" target="_self" id="detail" data-nip="' +
+						row.NIP + '"><h2>' + row.nama + '</h2><p>NIP: ' + row.NIP +
 						'</p><p>No. Telepon: ' + row.no_telp + '</p></a></li>';
-					$('#list-psn').append(appendList);
-					$('#list-psn').listview('refresh');
+					$('#list-dok').append(appendList);
+					$('#list-dok').listview('refresh');
 				})
 			},
 
@@ -70,9 +70,9 @@ var Application = {
 		});
 	},
 
-	initShowDetailPsn: function (id) {
+	initShowDetailDok: function (nip) {
 		$.ajax({
-			url: 'https://vast-cliffs-90191.herokuapp.com/php/read_pasien.php',
+			url: 'https://vast-cliffs-90191.herokuapp.com/php/read_dokter.php',
 			type: 'get',
 			beforeSend: function () {
 				$.mobile.loading('show', {
@@ -84,18 +84,15 @@ var Application = {
 			success: function (dataObject) {
 				let data = JSON.parse(dataObject);
 				data.forEach(row => {
-					if (row.ID == id) {
-						idpsn=row.ID
-						$('#p-ID,#p-nama_pasien,#p-jenis_kelamin,#p-alamat,#p-no_telp, #p-umur, #p-berat_badan,#p-tinggi_badan,#p-golongan_darah').empty();
-						$('#p-ID').append('<b>ID Pasien: </b>' + row.ID);
-						$('#p-nama_pasien').append('<b>Nama: </b>' + row.nama_pasien);
+					if (row.NIP == nip) {
+						nipdok=row.NIP;
+						$('#p-NIP,#p-nama,#p-jenis_kelamin,#p-alamat,#p-no_telp,#p-gaji_pokok').empty();
+						$('#p-NIP').append('<b>NIP: </b>' + row.NIP);
+						$('#p-nama').append('<b>Nama: </b>' + row.nama);
 						$('#p-jenis_kelamin').append('<b>Jenis Kelamin: </b>' + row.jenis_kelamin);
 						$('#p-alamat').append('<b>Alamat: </b>' + row.alamat);
 						$('#p-no_telp').append('<b>No. Telepon: </b>' + row.no_telp);
-						$('#p-umur').append('<b>Umur: </b>' + row.umur) + ' tahun';
-						$('#p-berat_badan').append('<b>Berat Badan: </b>' + row.berat_badan + ' kg');
-						$('#p-tinggi_badan').append('<b>Tinggi Badan: </b>' + row.tinggi_badan + ' cm');
-						$('#p-golongan_darah').append('<b>Golongan Darah: </b>' + row.golongan_darah);
+						$('#p-gaji_pokok').append('<b>Gaji Pokok:</b> Rp.' + row.gaji_pokok);
 					}
 				})
 			},
@@ -106,21 +103,19 @@ var Application = {
 		});
 	},
 
-	addPsn: function () {
+	addDok: function () {
 		$.ajax({
-			//url: 'http://localhost/rumahsakit/www/php/add_pasien.php',
-			url: 'https://vast-cliffs-90191.herokuapp.com/php/add_pasien.php',
+			//url: 'http://localhost/rumahsakit/www/php/add_dokter.php',
+			url: 'https://vast-cliffs-90191.herokuapp.com/php/add_dokter.php',
 			type: 'POST',
 			async: 'true',
 			data: {
+				nip: $('#nip').val(),
 				nama: $('#nama').val(),
 				select_jk: $("select#select-jk option").filter(":selected").val(),
 				alamat: $('#alamat').val(),
 				no_telp: $('#no_telp').val(),
-				umur: $('#umur').val(),
-				bb: $('#bb').val(),
-				tb: $('#tb').val(),
-				gd: $("select#select-gd option").filter(":selected").val()
+				gaji_pokok: $('#gaji_pokok').val()
 			},
 			beforeSend: function () {
 				console.log("beforesend");
@@ -147,18 +142,19 @@ var Application = {
 			complete: function () {
 				console.log("com");
 				$.mobile.loading('hide');
-				Application.initShowPsn();
+				Application.initShowDok();
 			}
 		})
 	},
-	deletePsn: function(idpsn){
+
+	deleteDok: function(n){
 		$.ajax({
-			//url: 'http://localhost/rumahsakit/www/php/delete_pasien.php',
-			url: 'https://vast-cliffs-90191.herokuapp.com/php/delete_pasien.php',
+			//url: 'http://localhost/rumahsakit/www/php/delete_dokter.php',
+			url: 'https://vast-cliffs-90191.herokuapp.com/php/delete_dokter.php',
 			type: 'POST',
 			async: 'true',
 			data: {
-				id: idpsn
+				nip: n
 			},
 			beforeSend: function () {
 				console.log("beforesend");
@@ -185,27 +181,24 @@ var Application = {
 			complete: function () {
 				console.log("com");
 				$.mobile.loading('hide');
-				Application.initShowPsn();
+				Application.initShowDok();
 			}
 		})
 	},
 
-	editPsn: function (psn) {
+	editDok: function (dok) {
 		$.ajax({
-			//url: 'http://localhost/rumahsakit/www/php/edit_pasien.php',
-			url: 'https://vast-cliffs-90191.herokuapp.com/php/edit_pasien.php',
+			//url: 'http://localhost/rumahsakit/www/php/edit_dokter.php',
+			url: 'https://vast-cliffs-90191.herokuapp.com/php/edit_dokter.php',
 			type: 'POST',
 			async: 'true',
 			data: {
-				id: psn,
+				nip: dok,
 				nama: $('#enama').val(),
 				select_jk: $("select#eselect-jk option").filter(":selected").val(),
 				alamat: $('#ealamat').val(),
 				no_telp: $('#eno_telp').val(),
-				umur: $('#eumur').val(),
-				bb: $('#ebb').val(),
-				tb: $('#etb').val(),
-				gd: $("select#eselect-gd option").filter(":selected").val()
+				gaji_pokok: $('#egaji_pokok').val()
 			},
 			beforeSend: function () {
 				console.log("beforesend");
@@ -232,7 +225,7 @@ var Application = {
 			complete: function () {
 				console.log("com");
 				$.mobile.loading('hide');
-				Application.initShowPsn();
+				Application.initShowDok();
 			}
 		})
 	},

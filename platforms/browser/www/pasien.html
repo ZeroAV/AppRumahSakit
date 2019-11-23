@@ -18,7 +18,7 @@
         <div data-role="header" data-position="fixed">
             <h1>Daftar Pasien</h1>
             <a href="pasien.html" data-icon="refresh" rel="external">Refresh</a>
-            <a href="#" data-icon="plus" rel="external">Add</a>
+            <a href="#page-three" data-icon="plus" rel="external" id="add_btn">Add</a>
         </div>
 
         <div role="main" class="ui-content">
@@ -30,8 +30,8 @@
                 <ul>
                     <li><a href="index.html" rel="external">Dokter</a></li>
                     <li><a href="pasien.html" rel="external" class="ui-btn-active ui-state-persist">Pasien</a></li>
-                    <li><a href="#" rel="external">Penyakit</a></li>
-                    <li><a href="#" rel="external">Transaksi</a></li>
+                    <li><a href="penyakit.html" rel="external">Penyakit</a></li>
+                    <li><a href="transaksi.html" rel="external">Transaksi</a></li>
                 </ul>
             </div><!-- /navbar -->
         </div><!-- /footer -->
@@ -52,13 +52,84 @@
             <p id="p-berat_badan"></p>
             <p id="p-tinggi_badan"></p>
             <p id="p-golongan_darah"></p><br>
-            <a href="#" class="ui-btn ui-icon-edit ui-btn-icon-left">Edit</a>
-            <a href="#" class="ui-btn ui-icon-delete ui-btn-icon-left">Delete</a>
+            <a href="" class="ui-btn ui-icon-edit ui-btn-icon-left" id="edit_btn">Edit</a>
+            <a href="" class="ui-btn ui-icon-delete ui-btn-icon-left" id="del_btn">Delete</a>
         </div>
     </div>
 
+    <div data-role="page" id="page-three">
+            <div data-role="header" data-add-back-btn="true">
+                <h1>Add Pasien</h1>
+            </div>
     
+            <div role="main" class="ui-content">
+                <form id="form_pasien" data-ajax="false" method="POST" accept-charset=utf-8>
+                    <label for="nama">Nama Pasien</label>
+                    <input type="text" name="nama" id="nama" value=""><br>
+                    <label for="select-jk" class="select">Jenis Kelamin</label>
+                    <select name="select-jk" id="select-jk">
+                        <option value="L">L</option>
+                        <option value="P">P</option>
+                    </select>
+                    <label for="alamat">Alamat</label>
+                    <input type="text" name="alamat" id="alamat" value=""><br>
+                    <label for="no_telp">No. Telepon</label>
+                    <input type="text" name="no_telp" id="no_telp" value=""><br>
+                    <label for="umur">Umur</label>
+                    <input type="number" name="umur" pattern="[0-9]*" id="umur" value=""><br>
+                    <label for="bb">Berat Badan</label>
+                    <input type="number" name="bb" pattern="[0-9]*" id="bb" value=""><br>
+                    <label for="tb">Tinggi Badan</label>
+                    <input type="number" name="tb" pattern="[0-9]*" id="tb" value=""><br>
+                    <label for="select-gd" class="select">Golongan Darah</label>
+                    <select name="select-gd" id="select-gd">
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="AB">AB</option>
+                            <option value="O">O</option>
+                    </select><br>
+                    <input type="submit" value="Add" data-icon="plus">
+                    
+                </form>
+            </div>
+        </div>
     
+        <div data-role="page" id="page-four">
+            <div data-role="header" data-add-back-btn="true">
+                <h1>Edit Pasien</h1>
+            </div>
+    
+            <div role="main" class="ui-content">
+                <form id="eform_pasien" data-ajax="false" method="POST" accept-charset=utf-8>
+                    <label for="enama">Nama Pasien</label>
+                    <input type="text" name="enama" id="enama" value=""><br>
+                    <label for="eselect-jk" class="select">Jenis Kelamin</label>
+                    <select name="eselect-jk" id="eselect-jk">
+                        <option value="L">L</option>
+                        <option value="P">P</option>
+                    </select>
+                    <label for="ealamat">Alamat</label>
+                    <input type="text" name="ealamat" id="ealamat" value=""><br>
+                    <label for="eno_telp">No. Telepon</label>
+                    <input type="text" name="eno_telp" id="eno_telp" value=""><br>
+                    <label for="eumur">Umur</label>
+                    <input type="number" name="eumur" pattern="[0-9]*" id="eumur" value=""><br>
+                    <label for="ebb">Berat Badan</label>
+                    <input type="number" name="ebb" pattern="[0-9]*" id="ebb" value=""><br>
+                    <label for="etb">Tinggi Badan</label>
+                    <input type="number" name="etb" pattern="[0-9]*" id="etb" value=""><br>
+                    <label for="eselect-gd" class="select">Golongan Darah</label>
+                    <select name="eselect-gd" id="eselect-gd">
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="AB">AB</option>
+                            <option value="O">O</option>
+                    </select><br>
+                    <input type="submit" value="Edit" data-icon="edit">
+                    
+                </form>
+            </div>
+        </div>
 </body>
 
     
