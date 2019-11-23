@@ -25,18 +25,19 @@
             <ul id="list-trx" data-role="listview" data-inset="true" data-filter="true">
             </ul>
         </div>
-        <div data-role="footer" data-id="foo1" data-position="fixed">		
+        <div data-role="footer" data-id="foo1" data-position="fixed">
             <div data-role="navbar">
                 <ul>
                     <li><a href="index.html" rel="external">Dokter</a></li>
                     <li><a href="pasien.html" rel="external">Pasien</a></li>
                     <li><a href="penyakit.html" rel="external">Penyakit</a></li>
-                    <li><a href="transaksi.html" rel="external" class="ui-btn-active ui-state-persist">Transaksi</a></li>
+                    <li><a href="transaksi.html" rel="external" class="ui-btn-active ui-state-persist">Transaksi</a>
+                    </li>
                 </ul>
             </div><!-- /navbar -->
         </div><!-- /footer -->
     </div>
-    
+
     <div data-role="page" id="page-two">
         <div data-role="header" data-add-back-btn="true">
             <h1>Detail Transaksi</h1>
@@ -57,37 +58,63 @@
     </div>
 
     <div data-role="page" id="page-three">
-            <div data-role="header" data-add-back-btn="true">
-                <h1>Add Transaksi</h1>
-            </div>
-    
-            <div role="main" class="ui-content">
-                <form id="form_transaksi" data-ajax="false" method="POST" accept-charset=utf-8>
-                    <label for="no">No. Transaksi</label>
-                    <input type="text" name="no" id="no" value=""><br>
-                    <label for="select-psn" class="select">ID Pasien</label>
-                    <select name="select-psn" id="select-psn">
-                        <option value=""></option>
-                    </select><br>
-                    <label for="select-dok" class="select">NIP Dokter</label>
-                    <select name="select-dok" id="select-dok">
-                        <option value=""></option>
-                    </select><br>
-                    <label for="select-pyk" class="select">Kode Penyakit</label>
-                    <select name="select-pyk" id="select-pyk">
-                        <option value=""></option>
-                    </select><br>
-                    <label for="biaya">Biaya</label>
-                    <input type="text" name="biaya" id="biaya" value=""><br>
-                    <input type="submit" value="Add" data-icon="plus">
-                </form>
-            </div>
+        <div data-role="header" data-add-back-btn="true">
+            <h1>Add Transaksi</h1>
         </div>
-    
-    
+
+        <div role="main" class="ui-content">
+            <form id="form_transaksi" data-ajax="false" method="POST" accept-charset=utf-8>
+                <label for="no">No. Transaksi</label>
+                <input type="text" name="no" id="no" value=""><br>
+                <label for="select-psn" class="select">ID Pasien</label>
+                <select name="select-psn" id="select-psn">
+                    <option value=""></option>
+                </select><br>
+                <label for="select-dok" class="select">NIP Dokter</label>
+                <select name="select-dok" id="select-dok">
+                    <option value=""></option>
+                </select><br>
+                <label for="select-pyk" class="select">Kode Penyakit</label>
+                <select name="select-pyk" id="select-pyk">
+                    <option value=""></option>
+                </select><br>
+                <label for="biaya">Biaya</label>
+                <input type="text" name="biaya" id="biaya" value=""><br>
+                <input type="submit" value="Add" data-icon="plus">
+            </form>
+        </div>
+    </div>
+
+    <div data-role="page" id="page-four">
+        <div data-role="header" data-add-back-btn="true">
+            <h1>Edit Transaksi</h1>
+        </div>
+
+        <div role="main" class="ui-content">
+            <form id="eform_transaksi" data-ajax="false" method="POST" accept-charset=utf-8>
+                <label for="eselect-psn" class="select">ID Pasien</label>
+                <select name="eselect-psn" id="eselect-psn">
+                    <option value=""></option>
+                </select><br>
+                <label for="eselect-dok" class="select">NIP Dokter</label>
+                <select name="eselect-dok" id="eselect-dok">
+                    <option value=""></option>
+                </select><br>
+                <label for="eselect-pyk" class="select">Kode Penyakit</label>
+                <select name="eselect-pyk" id="eselect-pyk">
+                    <option value=""></option>
+                </select><br>
+                <label for="ebiaya">Biaya</label>
+                <input type="text" name="ebiaya" id="ebiaya" value=""><br>
+                <input type="submit" value="Edit" data-icon="edit">
+            </form>
+        </div>
+    </div>
+
+
 </body>
 
-    
+
 
 
 

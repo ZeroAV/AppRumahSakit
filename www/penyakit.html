@@ -73,6 +73,26 @@
         </div>
     </div>
 
+    <div data-role="page" id="page-four">
+        <div data-role="header" data-add-back-btn="true">
+            <h1>Edit Penyakit</h1>
+        </div>
+
+        <div role="main" class="ui-content">
+            <form id="eform_penyakit" data-ajax="false" method="POST" accept-charset=utf-8>
+                <label for="enama">Nama Penyakit</label>
+                <input type="text" name="enama" id="enama" value=""><br>
+                <label for="eselect-gol" class="select">Golongan</label>
+                <select name="eselect-gol" id="eselect-gol">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select><br>
+                <input type="submit" value="Edit" data-icon="edit">
+            </form>
+        </div>
+    </div>
+
 
 </body>
 

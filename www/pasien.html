@@ -94,6 +94,42 @@
             </div>
         </div>
     
+        <div data-role="page" id="page-four">
+            <div data-role="header" data-add-back-btn="true">
+                <h1>Edit Pasien</h1>
+            </div>
+    
+            <div role="main" class="ui-content">
+                <form id="eform_pasien" data-ajax="false" method="POST" accept-charset=utf-8>
+                    <label for="enama">Nama Pasien</label>
+                    <input type="text" name="enama" id="enama" value=""><br>
+                    <label for="eselect-jk" class="select">Jenis Kelamin</label>
+                    <select name="eselect-jk" id="eselect-jk">
+                        <option value="L">L</option>
+                        <option value="P">P</option>
+                    </select>
+                    <label for="ealamat">Alamat</label>
+                    <input type="text" name="ealamat" id="ealamat" value=""><br>
+                    <label for="eno_telp">No. Telepon</label>
+                    <input type="text" name="eno_telp" id="eno_telp" value=""><br>
+                    <label for="eumur">Umur</label>
+                    <input type="number" name="eumur" pattern="[0-9]*" id="eumur" value=""><br>
+                    <label for="ebb">Berat Badan</label>
+                    <input type="number" name="ebb" pattern="[0-9]*" id="ebb" value=""><br>
+                    <label for="etb">Tinggi Badan</label>
+                    <input type="number" name="etb" pattern="[0-9]*" id="etb" value=""><br>
+                    <label for="eselect-gd" class="select">Golongan Darah</label>
+                    <select name="eselect-gd" id="eselect-gd">
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="AB">AB</option>
+                            <option value="O">O</option>
+                    </select><br>
+                    <input type="submit" value="Edit" data-icon="edit">
+                    
+                </form>
+            </div>
+        </div>
 </body>
 
     

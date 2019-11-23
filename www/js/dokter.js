@@ -24,6 +24,19 @@ var Application = {
 		$(document).on('click', "#del_btn", function () {
 			Application.deleteDok(nipdok);
 		})
+		$(document).on('click', "#edit_btn", function () {
+			$.mobile.changePage("#page-four");
+			$('#eform_dokter').submit(function (e) {
+				e.preventDefault();
+				console.log('submit');
+				Application.editDok(nipdok);
+				$('#eform_dokter').ajaxComplete(function (e) {
+					e.preventDefault();
+					console.log('ajaxcom')
+					return;
+				});
+			})
+		})
 	},
 
 	initShowDok: function () {
@@ -171,5 +184,49 @@ var Application = {
 				Application.initShowDok();
 			}
 		})
-	}
+	},
+
+	editDok: function (dok) {
+		$.ajax({
+			//url: 'http://localhost/rumahsakit/www/php/edit_dokter.php',
+			url: 'https://vast-cliffs-90191.herokuapp.com/php/edit_dokter.php',
+			type: 'POST',
+			async: 'true',
+			data: {
+				nip: dok,
+				nama: $('#enama').val(),
+				select_jk: $("select#eselect-jk option").filter(":selected").val(),
+				alamat: $('#ealamat').val(),
+				no_telp: $('#eno_telp').val(),
+				gaji_pokok: $('#egaji_pokok').val()
+			},
+			beforeSend: function () {
+				console.log("beforesend");
+				$.mobile.loading('show', {
+					text: 'Editing data...',
+					textVisible: true
+				});
+			},
+
+			success: function () {
+				console.log("succ");
+				$.mobile.changePage("#page-one");
+			},
+
+			error: function (request, error) {
+				console.log("error");
+				alert('Network error has occurred please try again!');
+			},
+
+			failed: function () {
+				console.log("salah");
+			},
+
+			complete: function () {
+				console.log("com");
+				$.mobile.loading('hide');
+				Application.initShowDok();
+			}
+		})
+	},
 }

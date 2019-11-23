@@ -81,6 +81,31 @@
         </div>
     </div>
 
+    <div data-role="page" id="page-four">
+        <div data-role="header" data-add-back-btn="true">
+            <h1>Edit Dokter</h1>
+        </div>
+
+        <div role="main" class="ui-content">
+            <form id="eform_dokter" data-ajax="false" method="POST" accept-charset=utf-8>
+                <label for="enama">Nama</label>
+                <input type="text" name="enama" id="enama" value=""><br>
+                <label for="eselect-jk" class="select">Jenis Kelamin</label>
+                <select name="eselect-jk" id="eselect-jk">
+                    <option value="L">L</option>
+                    <option value="P">P</option>
+                </select><br>
+                <label for="ealamat">Alamat</label>
+                <input type="text" name="ealamat" id="ealamat" value=""><br>
+                <label for="eno_telp">No. Telepon</label>
+                <input type="text" name="eno_telp" id="eno_telp" value=""><br>
+                <label for="egaji_pokok">Gaji Pokok (Rp.)</label>
+                <input type="text" name="egaji_pokok" id="egaji_pokok" value=""><br>
+                <input type="submit" value="Edit" data-icon="edit">
+            </form>
+        </div>
+    </div>
+
 </body>
 
 
