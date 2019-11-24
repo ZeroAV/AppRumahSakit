@@ -87,7 +87,7 @@ var Application = {
 			},
 
 			success: function (dataObject) {
-				var no_transaksi, id_pasien, nama_pasien, nip_dokter, nama_dokter, kode_penyakit, nama_penyakit, biaya_perawatan;
+				var no_transaksi, id_pasien, nama_pasien, nip_dokter, nama_dokter, kode_penyakit, nama_penyakit, biaya_perawatan, waktu;
 				let data = JSON.parse(dataObject);
 				data.forEach(row => {
 					if (row.no_transaksi == no) {
@@ -100,9 +100,10 @@ var Application = {
 						nama_pasien = row.nama_pasien;
 						nama_dokter = row.nama;
 						nama_penyakit = row.nama_penyakit;
+						waktu = row.waktu;
 					}
 				})
-				$('#p-no_transaksi,#p-id_pasien,#p-nama_pasien,#p-nip_dokter,#p-nama_dokter,#p-kode_penyakit,#p-nama_penyakit,#p-nama_dokter,#p-biaya_perawatan').empty();
+				$('#p-no_transaksi,#p-id_pasien,#p-nama_pasien,#p-nip_dokter,#p-nama_dokter,#p-kode_penyakit,#p-nama_penyakit,#p-nama_dokter,#p-biaya_perawatan,#p-waktu').empty();
 				$('#p-no_transaksi').append('<b>No. Transaksi: </b>' + no_transaksi);
 				$('#p-id_pasien').append('<b>ID Pasien: </b>' + id_pasien);
 				$('#p-nama_pasien').append('<b>Nama Pasien: </b>' + nama_pasien);
@@ -111,6 +112,7 @@ var Application = {
 				$('#p-kode_penyakit').append('<b>Kode Penyakit: </b>' + kode_penyakit);
 				$('#p-nama_penyakit').append('<b>Nama Penyakit: </b>' + nama_penyakit);
 				$('#p-biaya_perawatan').append('<b>Biaya perawatan: </b>Rp. ' + biaya_perawatan);
+				$('#p-waktu').append('<b>Waktu transaksi: </b>' + waktu);
 			},
 
 			complete: function () {
